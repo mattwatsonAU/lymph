@@ -11,15 +11,15 @@
 
   $database = mysqli_select_db($connection, DB_DATABASE);
 
-  /* Ensure that the Employees table exists. */
-  VerifyEmployeesTable($connection, DB_DATABASE); 
+  /* Ensure that the Patients table exists. */
+  VerifyPatientsTable($connection, DB_DATABASE); 
 
-  /* If input fields are populated, add a row to the Employees table. */
-  $employee_name = htmlentities($_POST['Name']);
-  $employee_address = htmlentities($_POST['Address']);
+  /* If input fields are populated, add a row to the Patients table. */
+  $patient_name = htmlentities($_POST['Name']);
+  $patient_address = htmlentities($_POST['Address']);
 
-  if (strlen($employee_name) || strlen($employee_address)) {
-    AddEmployee($connection, $employee_name, $employee_address);
+  if (strlen($patient_name) || strlen($patient_address)) {
+    Addpatient($connection, $patient_name, $patient_address);
   }
 ?>
 
@@ -54,7 +54,7 @@
 
 <?php
 
-$result = mysqli_query($connection, "SELECT * FROM Employees"); 
+$result = mysqli_query($connection, "SELECT * FROM Patients"); 
 
 while($query_data = mysqli_fetch_row($result)) {
   echo "<tr>";
@@ -81,21 +81,21 @@ while($query_data = mysqli_fetch_row($result)) {
 
 <?php
 
-/* Add an employee to the table. */
-function AddEmployee($connection, $name, $address) {
+/* Add a patient to the table. */
+function AddPatient($connection, $name, $address) {
    $n = mysqli_real_escape_string($connection, $name);
    $a = mysqli_real_escape_string($connection, $address);
 
-   $query = "INSERT INTO `Employees` (`Name`, `Address`) VALUES ('$n', '$a');";
+   $query = "INSERT INTO `Patients` (`Name`, `Address`) VALUES ('$n', '$a');";
 
-   if(!mysqli_query($connection, $query)) echo("<p>Error adding employee data.</p>");
+   if(!mysqli_query($connection, $query)) echo("<p>Error adding patient data.</p>");
 }
 
 /* Check whether the table exists and, if not, create it. */
-function VerifyEmployeesTable($connection, $dbName) {
-  if(!TableExists("Employees", $connection, $dbName)) 
+function VerifyPatientsTable($connection, $dbName) {
+  if(!TableExists("Patients", $connection, $dbName)) 
   { 
-     $query = "CREATE TABLE `Employees` (
+     $query = "CREATE TABLE `Patients` (
          `ID` int(11) NOT NULL AUTO_INCREMENT,
          `Name` varchar(45) DEFAULT NULL,
          `Address` varchar(90) DEFAULT NULL,

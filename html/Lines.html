@@ -3,8 +3,10 @@
 <html>
 
 <head>
-    <title>Line Chart</title>
+    <title>Team Lymph</title>
+    <link rel="icon" href="/assets/favicon-16x16.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <link rel="stylesheet" media="screen" href="/assets/login.css" />
     <style>
     canvas{
         -moz-user-select: none;
@@ -16,25 +18,28 @@
 
 <body>
     <!-- <canvas id="line-chart" width="75%"></canvas> -->
-    <div style="width:75%;">
-        <canvas id="line-chart"></canvas>
+    <div class="dashboard-page">
+        <div class="graph">
+            <canvas id="line-chart"></canvas>
+        </div>
+        <div class="dashboard-form">
+            <form id="form" onsubmit="return false;">
+                <legend>Data input:</legend>
+                Control Limb:<br>
+                <input type="number" id="inputControl" /><br>
+                Affected Limb:<br>
+                <input type="number" id="inputAffected" /><br><br>
+                <input type="submit" onclick="othername();" />
+            </form>
+        </div>
     </div>
-    <div style="position:absolute; top:60%; left:5%; width:40%;">
-        <form id="form" onsubmit="return false;">
-            <legend>Data input:</legend>
-            Control Limb:<br>
-            <input type="number" id="inputControl" /><br>
-            Affected Limb:<br>
-            <input type="number" id="inputAffected" /><br><br>
-            <input type="submit" onclick="othername();" />
-        </form>
-    </div>
-
     
 
     <script>
-        var controlLimb = [5, 6, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5];
-        var affectedLimb = [5, 8, 9, 12, 17, 26, 23, 23, 21, 19, 14, 8];
+        // var controlLimb = [5, 6, 6, 5, 5, 5, 5, 5, 6, 5, 5, 5];
+        var controlLimb = []
+        // var affectedLimb = [5, 8, 9, 12, 17, 26, 23, 23, 21, 19, 14, 8];
+        var affectedLimb = []
         var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
         var config = {
